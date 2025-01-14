@@ -26,7 +26,7 @@ class TigrContactShortcode {
         $form = $this->tigrCreateElement($dom, 'form', 'form', 'tigr-contact');
         
         $namesContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'names-container');
-        $namesContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, '姓名'));
+        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, '姓名'));
 
         $firstNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'first-name-container');
         $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'first_name', 'required' => 'required']));
