@@ -123,7 +123,7 @@ class TigrContactShortcode {
             'tigr-contact-form',
             plugin_dir_url(__FILE__) . '../../js/tigr-contact-form.js',
             [],
-            '0.0.0.0',
+            '0.0.0.0.0',
             true
         );
     }
