@@ -15,13 +15,13 @@ document.getElementById("form-tigr-contact").addEventListener("submit", function
     .then(response => response.json())
     .then(data => {
         const messageDiv = document.querySelector(".form-message");
-        if (data.status === 200) {
+        if (data.status) {
+            messageDiv.textContent = data.message;
+            messageDiv.style.color = "red";
+        } else {
             messageDiv.textContent = data.message;
             messageDiv.style.color = "green";
             e.target.reset(); // Clear form on success
-        } else {
-            messageDiv.textContent = data.message;
-            messageDiv.style.color = "red";
         }
     })
     .catch(error => {
