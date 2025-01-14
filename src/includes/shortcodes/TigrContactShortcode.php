@@ -3,11 +3,13 @@ namespace TigreGrades\Contact\Shortcodes;
 
 use DOMDocument;
 use DOMElement;
+use WP_Error;
+use WP_REST_Response;
 
 /**
- * Handles the [spenpo_resume] shortcode functionality.
+ * Handles the [tigr_contact] shortcode functionality.
  * 
- * @package Spenpo\Resume
+ * @package TigreGrades\Contact
  * @since 1.0.0
  */
 class TigrContactShortcode {
