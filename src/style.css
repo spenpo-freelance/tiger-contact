@@ -1,10 +1,15 @@
 #form-group-names-container {
     display: flex;
     gap: 20px;
+    margin-bottom: 0;
 }
 
 #form-group-names-container div {
     flex: 1;
+}
+
+#form-group-names-container input {
+    border-radius: 2px;
 }
 
 #form-group-names-container label {
@@ -21,16 +26,16 @@
     border-radius: 2px;
 }
 
-#from-tigr-contact button:hover {
+#form-tigr-contact button:hover {
     background-color: #03c4eb;
 }
 
-#from-tigr-contact button:active {
+#form-tigr-contact button:active {
     background-color: #03c4eb;
 }
 
-#from-tigr-contact button:focus {
-    outline: solid 1px #066aab;
+#form-tigr-contact button:focus {
+    outline: solid 2px #03c4eb;
 }
 
 label {
