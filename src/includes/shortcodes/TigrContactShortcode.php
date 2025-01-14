@@ -44,10 +44,6 @@ class TigrContactShortcode {
         
         $form->appendChild($this->tigrCreateElement($dom, 'button', 'button', null, 'Submit', ['type' => 'submit']));
 
-        // Update form attributes
-        $form->setAttribute('id', 'inactive-user-form');
-        // Remove the action and method attributes since we'll handle this with JS
-        
         // Add response message div
         $messageDiv = $this->tigrCreateElement($dom, 'div', 'div', 'form-message');
         $form->appendChild($messageDiv);
@@ -57,7 +53,7 @@ class TigrContactShortcode {
         // Add JavaScript for form handling
         $script = $dom->createElement('script');
         $script->textContent = '
-            document.getElementById("inactive-user-form").addEventListener("submit", function(e) {
+            document.getElementById("tigr-contact-form").addEventListener("submit", function(e) {
                 e.preventDefault();
                 
                 const formData = new FormData(this);
