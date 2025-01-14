@@ -81,7 +81,7 @@ class TigrContactShortcode {
         // Add JavaScript for form handling
         $script = $dom->createElement('script');
         $script->textContent = '
-            document.getElementById("tigr-contact-form").addEventListener("submit", function(e) {
+            document.getElementById("form-tigr-contact").addEventListener("submit", function(e) {
                 e.preventDefault();
                 
                 const formData = new FormData(this);
