@@ -26,23 +26,25 @@ class TigrContactShortcode {
         $form = $this->tigrCreateElement($dom, 'form', 'form', 'tigr-contact');
         
         $namesContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'names-container');
+        $namesContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, '姓名'));
+
         $firstNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'first-name-container');
-        $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'First Name', ['for' => 'first_name']));
         $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'first_name', 'required' => 'required']));
+        $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Frist', ['for' => 'first_name']));
         
         $lastNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'last-name-container');
-        $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Last Name', ['for' => 'last_name']));
         $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'last_name', 'required' => 'required']));
+        $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Last', ['for' => 'last_name']));
 
         $namesContainer->appendChild($firstNameContainer);
         $namesContainer->appendChild($lastNameContainer);
         $form->appendChild($namesContainer);
 
         // Email field
-        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Email', ['for' => 'email']));
+        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, '电子邮箱', ['for' => 'email']));
         $form->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'email', 'name' => 'email', 'required' => 'required']));
         
-        $form->appendChild($this->tigrCreateElement($dom, 'button', 'button', null, 'Submit', ['type' => 'submit']));
+        $form->appendChild($this->tigrCreateElement($dom, 'button', 'button', null, '提交', ['type' => 'submit']));
 
         // Add response message div
         $messageDiv = $this->tigrCreateElement($dom, 'div', 'div', 'form-message');

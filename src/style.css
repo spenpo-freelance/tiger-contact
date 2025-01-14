@@ -14,4 +14,18 @@
 #form-tigr-contact button {
     margin-top: 10px;
     width: 100%;
+    color: white;
+    background-color: #066aab;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+label.required {
+    color: #303030;
+}
+
+label.required:after {
+    content: " *";
+    color: red;
 }
