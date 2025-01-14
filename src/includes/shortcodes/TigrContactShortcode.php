@@ -17,34 +17,60 @@ class TigrContactShortcode {
         // Register the REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
 
-        add_shortcode('tigr_contact', [$this, 'tigrRender']);
+        add_shortcode('tigr_contact', function($atts) {
+            // Merge user attributes with defaults
+            $attributes = shortcode_atts([
+                'lang' => 'en', // default value
+            ], $atts);
+            
+            return $this->tigrRender($attributes);
+        });
     }
 
-    public function tigrRender() {
+    public function tigrRender($atts) {
+        $labels = [
+            'en' => [
+                'name' => 'Name',
+                'first_name' => 'First',
+                'last_name' => 'Last',
+                'email' => 'Email',
+                'submit' => 'Submit',
+            ],
+            'zh' => [
+                'name' => '姓名',
+                'first_name' => '名',
+                'last_name' => '姓',
+                'email' => '电子邮箱',
+                'submit' => '提交',
+            ],
+        ];
+
+        $label = $labels[$atts['lang']];
+
         // Create form with more fields
         $dom = new DOMDocument('1.0', 'utf-8');
         $form = $this->tigrCreateElement($dom, 'form', 'form', 'tigr-contact');
         
         $namesContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'names-container');
-        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, '姓名'));
+        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, $label['name']));
 
         $firstNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'first-name-container');
         $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'first_name', 'required' => 'required']));
-        $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Frist', ['for' => 'first_name']));
+        $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, $label['first_name'], ['for' => 'first_name']));
         
         $lastNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'last-name-container');
         $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'last_name', 'required' => 'required']));
-        $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Last', ['for' => 'last_name']));
+        $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, $label['last_name'], ['for' => 'last_name']));
 
         $namesContainer->appendChild($firstNameContainer);
         $namesContainer->appendChild($lastNameContainer);
         $form->appendChild($namesContainer);
 
         // Email field
-        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, '电子邮箱', ['for' => 'email']));
+        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label required', null, $label['email'], ['for' => 'email']));
         $form->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'email', 'name' => 'email', 'required' => 'required']));
         
-        $form->appendChild($this->tigrCreateElement($dom, 'button', 'button', null, '提交', ['type' => 'submit']));
+        $form->appendChild($this->tigrCreateElement($dom, 'button', 'button', null, $label['submit'], ['type' => 'submit']));
 
         // Add response message div
         $messageDiv = $this->tigrCreateElement($dom, 'div', 'div', 'form-message');
