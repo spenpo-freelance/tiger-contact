@@ -23,7 +23,7 @@ class TigrContactShortcode {
     public function tigrRender() {
         // Create form with more fields
         $dom = new DOMDocument('1.0', 'utf-8');
-        $form = $this->tigrCreateElement($dom, 'form', 'form', 'tigr-contact-form');
+        $form = $this->tigrCreateElement($dom, 'form', 'form', 'tigr-contact');
         
         $namesContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'names-container');
         $firstNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'first-name-container');
