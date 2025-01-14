@@ -16,6 +16,8 @@ class TigrContactShortcode {
     public function __construct() {
         // Register the REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
+        // Add action to enqueue scripts
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 
         add_shortcode('tigr_contact', function($atts) {
             // Merge user attributes with defaults
@@ -73,49 +75,10 @@ class TigrContactShortcode {
         $form->appendChild($this->tigrCreateElement($dom, 'button', 'button', null, $label['submit'], ['type' => 'submit']));
 
         // Add response message div
-        $messageDiv = $this->tigrCreateElement($dom, 'div', 'div', 'form-message');
+        $messageDiv = $this->tigrCreateElement($dom, 'div', 'form-message');
         $form->appendChild($messageDiv);
 
         $dom->appendChild($form);
-
-        // Add JavaScript for form handling
-        $script = $dom->createElement('script');
-        $script->textContent = '
-            document.getElementById("form-tigr-contact").addEventListener("submit", function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(this);
-                const data = {};
-                formData.forEach((value, key) => data[key] = value);
-
-                fetch("/wp-json/tigr/v1/submit", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const messageDiv = document.querySelector(".form-message");
-                    if (data.message) {
-                        messageDiv.textContent = data.message;
-                        messageDiv.style.color = "green";
-                        e.target.reset(); // Clear form on success
-                    } else if (data.code) {
-                        messageDiv.textContent = data.message;
-                        messageDiv.style.color = "red";
-                    }
-                })
-                .catch(error => {
-                    const messageDiv = document.querySelector(".form-message");
-                    messageDiv.textContent = "An error occurred. Please try again.";
-                    messageDiv.style.color = "red";
-                });
-            });
-        ';
-
-        $dom->appendChild($script);
         return $dom->saveHTML();
     }
 
@@ -152,6 +115,17 @@ class TigrContactShortcode {
         update_user_meta($user_id, 'account_status', 'inactive');
 
         return new WP_REST_Response(['message' => 'User created successfully'], 200);
+    }
+
+    // Add this new method
+    public function enqueue_scripts() {
+        wp_enqueue_script(
+            'tigr-contact-form',
+            plugin_dir_url(__FILE__) . '../../js/tigr-contact-form.js',
+            [],
+            '1.0.0',
+            true
+        );
     }
 
     /**
