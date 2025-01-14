@@ -35,7 +35,7 @@ function tigr_enqueue_styles() {
         'tigr-styles',
         plugins_url('style.css', __FILE__),
         array(),
-        '0.0.0.0'
+        '0.0.0'
     );
 }
 add_action('wp_enqueue_scripts', 'tigr_enqueue_styles');

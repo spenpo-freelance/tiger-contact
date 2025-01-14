@@ -52,3 +52,11 @@ label.required:after {
     content: " *";
     color: red;
 }
+
+.form-message {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}

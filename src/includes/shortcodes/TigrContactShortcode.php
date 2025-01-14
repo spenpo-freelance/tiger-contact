@@ -29,25 +29,25 @@ class TigrContactShortcode {
         });
     }
 
-    public function tigrRender($atts) {
-        $labels = [
-            'en' => [
-                'name' => 'Name',
-                'first_name' => 'First',
-                'last_name' => 'Last',
-                'email' => 'Email',
-                'submit' => 'Submit',
-            ],
-            'zh' => [
-                'name' => '姓名',
-                'first_name' => '名',
-                'last_name' => '姓',
-                'email' => '电子邮箱',
-                'submit' => '提交',
-            ],
-        ];
+    public $labels = [
+        'en' => [
+            'name' => 'Name',
+            'first_name' => 'First',
+            'last_name' => 'Last',
+            'email' => 'Email',
+            'submit' => 'Submit',
+        ],
+        'zh' => [
+            'name' => '姓名',
+            'first_name' => '名',
+            'last_name' => '姓',
+            'email' => '电子邮箱',
+            'submit' => '提交',
+        ],
+    ];
 
-        $label = $labels[$atts['lang']];
+    public function tigrRender($atts) {
+        $label = $this->labels[$atts['lang']];
 
         // Create form with more fields
         $dom = new DOMDocument('1.0', 'utf-8');
@@ -114,7 +114,7 @@ class TigrContactShortcode {
         // Set user as inactive
         update_user_meta($user_id, 'account_status', 'inactive');
 
-        return new WP_REST_Response(['message' => 'User created successfully'], 200);
+        return new WP_REST_Response(['message' => 'Thank you for your interest! We will get back to you soon.'], 200);
     }
 
     // Add this new method
