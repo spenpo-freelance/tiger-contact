@@ -1,0 +1,17 @@
+#names-container {
+    display: flex;
+    gap: 10px;
+}
+
+#names-container input {
+    width: 100%;
+}
+
+#names-container label {
+    margin-bottom: 5px;
+}
+
+#tigr-contact-form button {
+    margin-top: 10px;
+    width: 100%;
+}

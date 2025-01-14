@@ -30,12 +30,12 @@ if (!defined('SPCV_URL')) {
 require_once SPCV_PATH . 'includes/shortcodes/TigrContactShortcode.php';
 
 // Register styles
-// function spcv_enqueue_styles() {
-//     wp_enqueue_style(
-//         'spcv-styles',
-//         plugins_url('style.css', __FILE__),
-//         array(),
-//         '1.0.0'
-//     );
-// }
-// add_action('wp_enqueue_scripts', 'spcv_enqueue_styles');
+function tigr_enqueue_styles() {
+    wp_enqueue_style(
+        'tigr-styles',
+        plugins_url('style.css', __FILE__),
+        array(),
+        '1.0.0'
+    );
+}
+add_action('wp_enqueue_scripts', 'tigr_enqueue_styles');

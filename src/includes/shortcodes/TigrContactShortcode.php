@@ -23,20 +23,21 @@ class TigrContactShortcode {
     public function tigrRender() {
         // Create form with more fields
         $dom = new DOMDocument('1.0', 'utf-8');
-        $form = $this->tigrCreateElement($dom, 'form', 'form');
+        $form = $this->tigrCreateElement($dom, 'form', 'form', 'tigr-contact-form');
         
-        // Username field
-        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Username', ['for' => 'username']));
-        $form->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'username', 'required' => 'required']));
+        $namesContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'names-container');
+        $firstNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'first-name-container');
+        $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'First Name', ['for' => 'first_name']));
+        $firstNameContainer->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'first_name', 'required' => 'required']));
         
-        // First name field
-        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'First Name', ['for' => 'first_name']));
-        $form->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'first_name', 'required' => 'required']));
-        
-        // Last name field
-        $form->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Last Name', ['for' => 'last_name']));
-        $form->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'last_name', 'required' => 'required']));
-        
+        $lastNameContainer = $this->tigrCreateElement($dom, 'div', 'form-group', 'last-name-container');
+        $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Last Name', ['for' => 'last_name']));
+        $lastNameContainer->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'text', 'name' => 'last_name', 'required' => 'required']));
+
+        $namesContainer->appendChild($firstNameContainer);
+        $namesContainer->appendChild($lastNameContainer);
+        $form->appendChild($namesContainer);
+
         // Email field
         $form->appendChild($this->tigrCreateElement($dom, 'label', 'label', null, 'Email', ['for' => 'email']));
         $form->appendChild($this->tigrCreateElement($dom, 'input', 'input', null, null, ['type' => 'email', 'name' => 'email', 'required' => 'required']));
@@ -109,7 +110,7 @@ class TigrContactShortcode {
         
         // Create user
         $userdata = array(
-            'user_login' => $body['username'],
+            'user_login' => $body['first_name'] . $body['last_name'],
             'user_email' => $body['email'],
             'user_pass'  => wp_generate_password(),
             'first_name' => $body['first_name'],
