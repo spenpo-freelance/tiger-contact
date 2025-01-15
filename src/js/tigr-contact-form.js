@@ -15,7 +15,7 @@ document.getElementById("form-tigr-contact").addEventListener("submit", function
     .then(response => response.json())
     .then(data => {
         const messageDiv = document.querySelector(".form-message");
-        if (data.data.status) {
+        if (data.data?.status) {
             messageDiv.textContent = data.message;
             messageDiv.style.color = "red";
         } else {
