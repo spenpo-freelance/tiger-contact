@@ -5,7 +5,7 @@
  * Description:       contact form
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            spenpo
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +35,7 @@ function tigr_enqueue_styles() {
         'tigr-styles',
         plugins_url('style.css', __FILE__),
         array(),
-        '1.0.0'
+        '1.0.1'
     );
 }
 add_action('wp_enqueue_scripts', 'tigr_enqueue_styles');

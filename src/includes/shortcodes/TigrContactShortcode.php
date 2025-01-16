@@ -10,7 +10,7 @@ use WP_REST_Response;
  * Handles the [tigr_contact] shortcode functionality.
  * 
  * @package TigreGrades\Contact
- * @since 1.0.0
+ * @since 1.0.1
  */
 class TigrContactShortcode {
     public function __construct() {
@@ -123,7 +123,7 @@ class TigrContactShortcode {
             'tigr-contact-form',
             plugin_dir_url(__FILE__) . '../../js/tigr-contact-form.js',
             [],
-            '1.0.0',
+            '1.0.1',
             true
         );
     }
