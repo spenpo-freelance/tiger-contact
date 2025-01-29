@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - staging
+      - release
 
 jobs:
   deploy:
@@ -18,8 +19,10 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "DEPLOY_PATH=${{ secrets.TIGER_GRADES_PATH }}/wp-content/plugins/tiger-contact/" >> $GITHUB_ENV
-          else
+          elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
             echo "DEPLOY_PATH=${{ secrets.TIGER_GRADES_PATH }}/staging/wp-content/plugins/tiger-contact/" >> $GITHUB_ENV
+          else
+            echo "DEPLOY_PATH=${{ secrets.TIGER_GRADES_PATH }}/release/wp-content/plugins/tiger-contact/" >> $GITHUB_ENV
           fi
 
       - name: Deploy via Rsync
